@@ -1,17 +1,32 @@
 ﻿using static System.Console;
 WriteLine("Введите массив через пробел: ");
 string[] array = ReadLine()!.Split(" ", StringSplitOptions.RemoveEmptyEntries);
-
-PrintArray(array);
 WriteLine();
+WriteLine("[{0}]", string.Join(", ", newArray(array)));
 
-
-void PrintArray(string[] inArray)
+string[] newArray(string[] inArray) 
 {
-    Write("[");
-    for(int i=0; i<inArray.Length-1; i++)
+    string[] resultArray = new string[NewArraySize(inArray)];
+    int count = 0;
+    for(var i=0; i<inArray.Length; i++)
     {
-      Write($"{inArray[i]}, ");  
+        if (inArray[i].Length <= 3)
+        {
+            resultArray[count] = inArray[i];
+            count++;
+        }
     }
-    Write($"{inArray[inArray.Length-1]}]");
+    return resultArray;
+
+}
+
+int NewArraySize(string[] inArray2) 
+{
+    int result = 0;
+    for(var j=0; j<inArray2.Length; j++)
+    {
+        if (inArray2[j].Length <= 3)
+            result++;
+    }
+    return result;
 }
